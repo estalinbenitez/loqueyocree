@@ -16,7 +16,9 @@ Lista::~Lista()
 
 void Lista::agregar(Animal* animalito){
 
+//en esta parte verifico si el inicio es null
     if(inicio!=NULL){
+        //si el inicio no es igual ah null creo el apuntador temporal
             Animal*temp=inicio;
             while(temp->sig!=NULL){
                 temp=temp->sig;
@@ -82,15 +84,19 @@ void Lista::leer(){
 
 Animal* Lista::getAnimalMasViejo()
 {
+    //en este if si el inicio es null la lista esta vacia entonces retorno null
     if(inicio == NULL){
+        
     return NULL;
     }
 
-    Animal* viejos;
+    // creo el apuntador animal, y en el ciclo lo igualo al temporal
+        Animal* viejos;
     for(Animal* temp=inicio; temp->sig != NULL ;temp=temp->sig){
        viejos = temp;
 
-        if(temp->edad>viejos->edad)
+            //en este if verifico si el edad del temp es mayor que el del vejo el viejo lo igualo al temp
+        if(temp->edad > viejos->edad)
         {
 
         viejos = temp;
@@ -103,14 +109,17 @@ Animal* Lista::getAnimalMasViejo()
 
 Animal* Lista::getAnimalMasJoven()
 {
+    //verifico si la lista esta vacia y si lo esta retorno null
     if(inicio == NULL){
     return NULL;
     }
 
+//en este for recorro la lista i ago lo mismo del animal mas viejo solo que en el if se verifica que si es menor que la edad
+
     Animal* ed;
     for(Animal* temp=inicio; temp->sig != NULL ;temp=temp->sig){
          ed = temp;
-        if(temp->edad<ed->edad)
+        if(temp->edad < ed->edad)
         {
 
             ed = temp;
@@ -123,19 +132,21 @@ Animal* Lista::getAnimalMasJoven()
 }
 
 Animal* Lista::buscar(string nombre){
-
+//verifico si la lista no esta basia
     if (inicio == NULL)
         {
             return NULL;
         }
 
-
+    //en este ciclo busco el nombre en la lista y si lo encuentro lo retorno
      for(Animal*temp=inicio; temp->sig != NULL ;temp=temp->sig){
         if(temp-> nombre == nombre){
             return temp;
         }
 
      }
+     
+     //si recorro la lista y no lo encuentro retorno  null
            cout<< "Animal no Existe";
 
             return NULL;
@@ -143,6 +154,7 @@ Animal* Lista::buscar(string nombre){
    }
 void Lista::insertar(Animal*animalito , int pos ){
 
+    // verifico si la posicion es igual ah cero para mover el inicio al segundo lugar
     if(pos == 0){
 
     Animal *temp = animalito;
@@ -154,6 +166,7 @@ void Lista::insertar(Animal*animalito , int pos ){
 
      Animal*temp = inicio;
 
+//en este siglo recorro el ciclo hasta la posicion insertada y verifico si el temp->sig es igual ah null eh ingreso
         for(int i= 1; i < pos; i++){
 
             if(temp->sig == NULL){
@@ -172,11 +185,14 @@ void Lista::insertar(Animal*animalito , int pos ){
 
 void Lista::Borrar(string nom){
 
+    //verifico que el inicio se distinto de null
   if(inicio != NULL){
+      //si el nombre esta en el inicio desconecto el inicio 
             if(inicio->nombre==nom){
                 inicio = inicio->sig;
 
             }else{
+                //recorro el ciclo hasta encontrar el nombre ingresado y lo desconecto 
                 Animal* temp= inicio;
                 for(temp=inicio; temp->sig != NULL ;temp=temp->sig){
                     if(temp->sig->nombre==nom){
@@ -190,14 +206,16 @@ void Lista::Borrar(string nom){
 
 double Lista::promedio(){
 
+// si el inicio  es igual ah null retorno 0
     if(inicio==NULL){
         return 0 ;
     }
+    // creo las variables para los acumuladores
     double suma=0;
     double acumulador=0;
 
     Animal *temp =inicio;
-
+//recorro la lista y voy guardando la edad y al final de la funcion la divido entre la cantidad
     for(temp=inicio; temp->sig != NULL ;temp=temp->sig){
         suma+=temp->edad;
         acumulador++;
